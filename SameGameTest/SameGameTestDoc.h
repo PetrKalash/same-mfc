@@ -14,19 +14,17 @@ public:
 
 // Операции
 public:
-	// Получение цвета игровой ячейки
-	COLORREF get_colors(int32_t row, int32_t col) { return m_board.get_colors(row, col); }
-	// Получение кол-ва ячеек у строки
-	int32_t get_rows() const					  { return m_board.get_rows(); }	
-	// Получение кол-ва ячеек у столбца
-	int32_t get_cols() const					  { return m_board.get_cols(); }
-	// Получение ширины игрового поля
-	int32_t get_width()  const					  { return m_board.get_width();  }	
-	// Получение высоты игрового поля
-	int32_t get_height() const					  { return m_board.get_height(); }
+	void delete_cells()									{ m_board.delete_cells(); }
 
-	// Очистка одинаковых ячеек
-	void delete_cells()							  { m_board.delete_cells(); }
+	COLORREF get_colors(int32_t row, int32_t col) const { return m_board.get_colors(row, col); }
+	int32_t get_rows() const							{ return m_board.get_rows(); }	
+	int32_t get_cols() const							{ return m_board.get_cols(); }
+	int32_t get_width()	const							{ return m_board.get_width(); }	
+	int32_t get_height() const							{ return m_board.get_height(); }
+	int32_t get_num_colors() const						{ return m_board.get_num_colors(); }
+
+	// Установка нового кол-ва цветов для ячеек на игровом поле
+	void set_num_colors(int32_t count_colors);
 
 // Переопределение
 public:

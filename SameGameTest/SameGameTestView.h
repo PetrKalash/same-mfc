@@ -13,6 +13,8 @@ public:
 
 // Операции
 public:
+	// 
+	void set_color_count(int32_t count_colors);
 
 // Переопределение
 public:
@@ -38,6 +40,20 @@ protected:
 public:
 	virtual void OnInitialUpdate();
 	afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
+
+	// Изменение уровня сложности
+	afx_msg void OnLevelEasy();
+	afx_msg void OnLevelNormal();
+	afx_msg void OnLevelHard();
+	afx_msg void OnLevelCrazy();
+	afx_msg void OnLevelImpossible();
+
+	// Обновление меню
+	afx_msg void OnUpdateLevelEasy(CCmdUI *pCmdUI);
+	afx_msg void OnUpdateLevelNormal(CCmdUI *pCmdUI);
+	afx_msg void OnUpdateLevelHard(CCmdUI *pCmdUI);
+	afx_msg void OnUpdateLevelCrazy(CCmdUI *pCmdUI);
+	afx_msg void OnUpdateLevelImpossible(CCmdUI *pCmdUI);
 };
 
 #ifndef _DEBUG  // версия отладки в SameGameTestView.cpp

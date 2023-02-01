@@ -17,6 +17,16 @@
 IMPLEMENT_DYNCREATE(CSameGameTestView, CView)
 BEGIN_MESSAGE_MAP(CSameGameTestView, CView)
 	ON_WM_LBUTTONDOWN()
+	ON_COMMAND(ID_LEVEL_EASY, &CSameGameTestView::OnLevelEasy)
+	ON_UPDATE_COMMAND_UI(ID_LEVEL_EASY, &CSameGameTestView::OnUpdateLevelEasy)
+	ON_COMMAND(ID_LEVEL_CRAZY, &CSameGameTestView::OnLevelCrazy)
+	ON_UPDATE_COMMAND_UI(ID_LEVEL_CRAZY, &CSameGameTestView::OnUpdateLevelCrazy)
+	ON_COMMAND(ID_LEVEL_HARD, &CSameGameTestView::OnLevelHard)
+	ON_UPDATE_COMMAND_UI(ID_LEVEL_HARD, &CSameGameTestView::OnUpdateLevelHard)
+	ON_COMMAND(ID_LEVEL_IMPOSSIBLE, &CSameGameTestView::OnLevelImpossible)
+	ON_UPDATE_COMMAND_UI(ID_LEVEL_IMPOSSIBLE, &CSameGameTestView::OnUpdateLevelImpossible)
+	ON_COMMAND(ID_LEVEL_NORMAL, &CSameGameTestView::OnLevelNormal)
+	ON_UPDATE_COMMAND_UI(ID_LEVEL_NORMAL, &CSameGameTestView::OnUpdateLevelNormal)
 END_MESSAGE_MAP()
 
 // Создание или уничтожение CSameGameTestView
@@ -53,7 +63,7 @@ void CSameGameTestView::OnDraw(CDC* pDC)
 	br.CreateStockObject(HOLLOW_BRUSH);
 	CBrush* pbrOld = pDC->SelectObject(&br);
 
-	int32_t indent_cells {5};
+	int32_t indent_cells {0};
 
 	// Заполнение игрового поля ячейками
 	for (size_t count_rows{}, row{}; row < pDoc->get_rows(); ++row, count_rows += indent_cells) {
@@ -109,7 +119,7 @@ void CSameGameTestView::OnInitialUpdate()
 
 void CSameGameTestView::ResizeWindow()
 {
-	int32_t indent_cells {5};
+	int32_t indent_cells {0};
 
 	// Создание указателя на документ, чтобы получить данные игрового поля
 	CSameGameTestDoc* pDoc = GetDocument();
@@ -164,4 +174,85 @@ void CSameGameTestView::OnLButtonDown(UINT nFlags, CPoint point)
 	
 	// OnLButtonDown по умолчанию
 	CView::OnLButtonDown(nFlags, point);
+}
+
+void CSameGameTestView::set_color_count(int32_t count_colors)
+{
+	// Создание указателя на документ, чтобы получить данные игрового поля
+	CSameGameTestDoc* pDoc = GetDocument();
+	ASSERT_VALID(pDoc); if (!pDoc) return;
+
+	pDoc->set_num_colors(count_colors);
+
+	// Перерисовывание игрового поля View
+	Invalidate();
+	UpdateWindow();
+}
+
+void CSameGameTestView::OnLevelEasy()
+{
+	// Устанавливаем кол-во цветов на поле
+	set_color_count(3);
+}
+
+void CSameGameTestView::OnUpdateLevelEasy(CCmdUI *pCmdUI)
+{
+	// Создание указателя на документ, чтобы получить данные игрового поля
+	CSameGameTestDoc* pDoc = GetDocument();
+	ASSERT_VALID(pDoc); if (!pDoc) return;
+
+	// Проверка установленного уровня сложности
+	pCmdUI->SetCheck(pDoc->get_num_colors() == 3);
+}
+
+void CSameGameTestView::OnLevelNormal()
+{
+	set_color_count(4);
+}
+
+void CSameGameTestView::OnUpdateLevelNormal(CCmdUI *pCmdUI)
+{
+	CSameGameTestDoc* pDoc = GetDocument();
+	ASSERT_VALID(pDoc); if (!pDoc) return;
+
+	pCmdUI->SetCheck(pDoc->get_num_colors() == 4);
+}
+
+void CSameGameTestView::OnLevelHard()
+{
+	set_color_count(5);
+}
+
+void CSameGameTestView::OnUpdateLevelHard(CCmdUI *pCmdUI)
+{
+	CSameGameTestDoc* pDoc = GetDocument();
+	ASSERT_VALID(pDoc); if (!pDoc) return;
+
+	pCmdUI->SetCheck(pDoc->get_num_colors() == 5);
+}
+
+void CSameGameTestView::OnLevelCrazy()
+{
+	set_color_count(6);
+}
+
+void CSameGameTestView::OnUpdateLevelCrazy(CCmdUI *pCmdUI)
+{
+	CSameGameTestDoc* pDoc = GetDocument();
+	ASSERT_VALID(pDoc); if (!pDoc) return;
+
+	pCmdUI->SetCheck(pDoc->get_num_colors() == 6);
+}
+
+void CSameGameTestView::OnLevelImpossible()
+{
+	set_color_count(7);
+}
+
+void CSameGameTestView::OnUpdateLevelImpossible(CCmdUI *pCmdUI)
+{
+	CSameGameTestDoc* pDoc = GetDocument();
+	ASSERT_VALID(pDoc); if (!pDoc) return;
+
+	pCmdUI->SetCheck(pDoc->get_num_colors() == 7);
 }

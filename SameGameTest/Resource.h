@@ -16,13 +16,22 @@
 #define ID_32779                        32779
 #define ID_32780                        32780
 #define ID_32781                        32781
+#define ID_32782                        32782
+#define ID_LEVEL_EASY                   32783
+#define ID_LEVEL_NORMAL                 32784
+#define ID_LEVEL_HARD                   32785
+#define ID_LEVEL_CRAZY                  32786
+#define ID_LEVEL_IMPOSSIBLE             32787
+#define ID_EDIT_REPLAY                  32788
+#define ID_COUNT_BLOCK                  32789
+#define ID_SIZE_BLOCK                   32790
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        310
-#define _APS_NEXT_COMMAND_VALUE         32782
+#define _APS_NEXT_COMMAND_VALUE         32791
 #define _APS_NEXT_CONTROL_VALUE         1000
 #define _APS_NEXT_SYMED_VALUE           310
 #endif

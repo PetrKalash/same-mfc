@@ -12,8 +12,9 @@ private:
 	int32_t m_cols;								// кол-во ячеек у столбца
 
 	std::vector<std::vector<int32_t>> m_cells;	// ячейки игрового поля
+	std::array<COLORREF, 8> m_colors;			// цвет ячеек
 
-	std::array<COLORREF, 4> m_colors;			// цвет ячеек
+	int32_t m_count_colors;						// кол-во цветов ячеек на игровом поле
 
 public:
 	/* Конструкторы и деструктор */
@@ -35,13 +36,20 @@ public:
 	/* Геттеры */
 
 	// Получение цвета игровой ячейки
-	COLORREF get_colors(int32_t &row, int32_t &col);
+	COLORREF get_colors(int32_t &row, int32_t &col) const;
 	// Получение кол-ва ячеек у строки
-	int32_t get_rows()	 const	{ return m_rows;   }	
+	int32_t get_rows()		 const	{ return m_rows;   }	
 	// Получение кол-ва ячеек у столбца
-	int32_t get_cols()	 const	{ return m_cols;   }
+	int32_t get_cols()		 const	{ return m_cols;   }
 	// Получение ширины игрового поля
-	int32_t get_width()  const	{ return m_width;  }	
+	int32_t get_width()		 const	{ return m_width;  }	
 	// Получение высоты игрового поля
-	int32_t get_height() const	{ return m_height; }
+	int32_t get_height()	 const	{ return m_height; }
+	// Получение кол-ва цветов
+	int32_t get_num_colors() const	{ return m_count_colors; }
+
+	/* Сеттеры */
+
+	// Установка нового кол-ва цветов для ячеек на игровом поле
+	void set_num_colors(int32_t &count_colors);
 };
