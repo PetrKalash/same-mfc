@@ -38,6 +38,10 @@ void CSameGameBoard::create_cells()
 	m_cells.assign(m_width, std::vector<int32_t>(m_height));
 }
 
+void CSameGameBoard::delete_cells()
+{
+}
+
 void CSameGameBoard::delete_board()
 {
 	// ≈сли игровое поле заполнено, делаем очистку €чеек

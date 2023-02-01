@@ -27,6 +27,8 @@ public:
 	void setup_board();
 	// —оздание €чеек на игровом поле
 	void create_cells();
+	// ќчистка одинаковых €чеек
+	void delete_cells();
 	// ќчистка игровой доски
 	void delete_board();
 

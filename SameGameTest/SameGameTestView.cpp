@@ -130,8 +130,8 @@ void CSameGameTestView::ResizeWindow()
 	int32_t height_menu_bar = rect_window.Height() - rect_client.Height();
 
 	// Вычисляем размер границы между блоками
-	int32_t width_indent = indent_cells * pDoc->get_cols();
-	int32_t height_indent = indent_cells * pDoc->get_cols();
+	int32_t width_indent = indent_cells * pDoc->get_cols() - indent_cells;
+	int32_t height_indent = indent_cells * pDoc->get_cols() - indent_cells;
 
 	// Изменяем размеры окна, исходя из размеров нашей доски
 	rect_window.right = rect_window.left + width_ciles + width_menu_bar + width_indent;
@@ -150,6 +150,13 @@ void CSameGameTestView::OnLButtonDown(UINT nFlags, CPoint point)
 	// Получаем координаты мыши
 	int32_t point_x = point.x / pDoc->get_width();
 	int32_t point_y = point.y / pDoc->get_width();
+
+	// Очистка ячеек на игровом поле
+	pDoc->delete_cells();
+
+	// Перерисовка View после изменения игрового поля
+	Invalidate();
+	UpdateWindow();
 
 	// Сообщение об окончании игры
 	CString finish_game(_T("No more moves left"));

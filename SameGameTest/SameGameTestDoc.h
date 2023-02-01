@@ -25,6 +25,9 @@ public:
 	// Получение высоты игрового поля
 	int32_t get_height() const					  { return m_board.get_height(); }
 
+	// Очистка одинаковых ячеек
+	void delete_cells()							  { m_board.delete_cells(); }
+
 // Переопределение
 public:
 	virtual BOOL OnNewDocument();
