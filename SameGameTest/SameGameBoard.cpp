@@ -43,8 +43,38 @@ void CSameGameBoard::create_cells()
 	m_cells.assign(m_width, std::vector<int32_t>(m_height));
 }
 
-void CSameGameBoard::delete_cells()
+void CSameGameBoard::delete_cells(int32_t &row, int32_t &col)
 {
+	// ”знаем цвет €чеек, которые нужно удал€ть (он будет равен выбранной €чейке)
+	int32_t color_cells = m_colors.at(m_cells.at(row).at(col));
+
+	// ≈сли цвет равен 0, значит мы нажали по пустой €чейке
+	if (color_cells == 0) return;
+
+	// Ќачинаем удал€ть €чейки одинакового цвета сверху
+	delete_neighbor_cells(row - 1, col, color_cells, Direction::UP);
+}
+
+void CSameGameBoard::delete_neighbor_cells(int32_t row, int32_t col, int32_t color, Direction direction)
+{
+	switch (direction)
+	{
+		// ѕроходимс€ по всем €чейкам и удал€ем соседние
+		case Direction::UP:
+		{
+			// ≈сли €чейка сверху равна цвету первой €чейки, начинаем проход вверх
+			if (m_cells.at(row).at(col) == color)
+			{
+				// ”дал€ем €чейку сверху
+				m_cells.at(row).at(col) = 0;
+
+				// ”дал€ем соседни €чейки справа и слева
+				m_cells.at(row).at(col) = 0;
+			}
+			break;
+		}
+		default: break;
+	}
 }
 
 void CSameGameBoard::delete_board()
@@ -63,7 +93,18 @@ COLORREF CSameGameBoard::get_colors(int32_t &row, int32_t &col) const
 
 void CSameGameBoard::set_num_colors(int32_t &count_colors)
 {
-	// ”станавливаем на поле кол-во цветов, равное переданному кол-ву
-	m_count_colors = count_colors;
-	//{ m_nColors = (nColors >= 3 && nColors <= 7) ? nColors : m_nColors; }
+	// ”станавливаем на поле кол-во цветов, равное переданному кол-ву. ≈сли мы 
+	// выходим за игровые пределы, то возвращаем текущее кол-во цветов
+	m_count_colors = (count_colors >= 3 && count_colors <= 7) ? count_colors : m_count_colors;
+}
+
+void CSameGameBoard::set_cells_count(int32_t &count_cols)
+{
+	// ѕроверка на выход за границы
+	m_cols = m_rows = sqrt(count_cols);
+}
+
+void CSameGameBoard::set_cells_size(int32_t &cells_size)
+{
+	m_width = m_height = cells_size;
 }

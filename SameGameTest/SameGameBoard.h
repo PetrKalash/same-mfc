@@ -5,8 +5,8 @@
 class CSameGameBoard
 {
 private:
-	const int32_t m_width;						// ширина €чейки
-	const int32_t m_height;						// высота €чейки
+	int32_t m_width;							// ширина €чейки
+	int32_t m_height;							// высота €чейки
 
 	int32_t m_rows;								// кол-во €чеек у строки
 	int32_t m_cols;								// кол-во €чеек у столбца
@@ -15,6 +15,17 @@ private:
 	std::array<COLORREF, 8> m_colors;			// цвет €чеек
 
 	int32_t m_count_colors;						// кол-во цветов €чеек на игровом поле
+
+private:
+	// —пособ направлени€ €чейки на игровом поле
+	enum class Direction
+	{
+		UP,
+		DOWN,
+		LEFT,
+		RIGHT,
+		MAX_VALUE_DIRECTION
+	};
 
 public:
 	/*  онструкторы и деструктор */
@@ -29,7 +40,9 @@ public:
 	// —оздание €чеек на игровом поле
 	void create_cells();
 	// ќчистка одинаковых €чеек
-	void delete_cells();
+	void delete_cells(int32_t &row, int32_t &col);
+	// ”даление соседних €чеек
+	void delete_neighbor_cells(int32_t row, int32_t col, int32_t color, Direction direction);
 	// ќчистка игровой доски
 	void delete_board();
 
@@ -52,4 +65,8 @@ public:
 
 	// ”становка нового кол-ва цветов дл€ €чеек на игровом поле
 	void set_num_colors(int32_t &count_colors);
+	// ”становка нового кол-ва €чеек на игровом поле
+	void set_cells_count(int32_t &count_cols);
+	// ”становка нового размера €чеек на игровом поле
+	void set_cells_size(int32_t &cells_size);
 };

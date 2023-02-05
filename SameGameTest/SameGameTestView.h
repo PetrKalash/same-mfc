@@ -1,6 +1,8 @@
 ﻿// SameGameTestView.h: интерфейс класса CSameGameTestView
 
 #pragma once
+#include "OptionDialog.h"
+
 class CSameGameTestView : public CView
 {
 protected: // создать только из сериализации
@@ -13,7 +15,7 @@ public:
 
 // Операции
 public:
-	// 
+	// Установка нового цвета на игровом поле
 	void set_color_count(int32_t count_colors);
 
 // Переопределение
@@ -54,6 +56,8 @@ public:
 	afx_msg void OnUpdateLevelHard(CCmdUI *pCmdUI);
 	afx_msg void OnUpdateLevelCrazy(CCmdUI *pCmdUI);
 	afx_msg void OnUpdateLevelImpossible(CCmdUI *pCmdUI);
+	afx_msg void OnSizeBlock();
+	afx_msg void OnCountBlock();
 };
 
 #ifndef _DEBUG  // версия отладки в SameGameTestView.cpp
