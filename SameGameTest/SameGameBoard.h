@@ -5,27 +5,17 @@
 class CSameGameBoard
 {
 private:
+	std::vector<std::vector<int32_t>> m_cells;	// €чейки игрового пол€
+	std::array<COLORREF, 8> m_colors;			// цвет €чеек
+
 	int32_t m_width;							// ширина €чейки
 	int32_t m_height;							// высота €чейки
 
 	int32_t m_rows;								// кол-во €чеек у строки
 	int32_t m_cols;								// кол-во €чеек у столбца
 
-	std::vector<std::vector<int32_t>> m_cells;	// €чейки игрового пол€
-	std::array<COLORREF, 8> m_colors;			// цвет €чеек
-
 	int32_t m_count_colors;						// кол-во цветов €чеек на игровом поле
-
-private:
-	// —пособ направлени€ €чейки на игровом поле
-	enum class Direction
-	{
-		UP,
-		DOWN,
-		LEFT,
-		RIGHT,
-		MAX_VALUE_DIRECTION
-	};
+	int32_t m_count_cells;						// кол-во оставшихс€ €чеек на игровом поле
 
 public:
 	/*  онструкторы и деструктор */
@@ -39,10 +29,14 @@ public:
 	void setup_board();
 	// —оздание €чеек на игровом поле
 	void create_cells();
+	// ѕроверка на конец игры
+	bool is_game_over();
+	//  омпактный сдвиг игровой доски после удалени€ €чеек
+	void compact_board();
 	// ќчистка одинаковых €чеек
 	void delete_cells(int32_t &row, int32_t &col);
 	// ”даление соседних €чеек
-	void delete_neighbor_cells(int32_t row, int32_t col, int32_t color, Direction direction);
+	void delete_neighbor_cells(int32_t row, int32_t col, int32_t color, int32_t &count_delete_cells);
 	// ќчистка игровой доски
 	void delete_board();
 
@@ -59,7 +53,9 @@ public:
 	// ѕолучение высоты игрового пол€
 	int32_t get_height()	 const	{ return m_height; }
 	// ѕолучение кол-ва цветов
-	int32_t get_num_colors() const	{ return m_count_colors; }
+	int32_t get_num_colors() const	{ return m_count_colors; }	
+	// ѕолучение кол-ва €ччек на игровом поле
+	int32_t get_count_cells() const	{ return m_count_cells; }
 
 	/* —еттеры */
 

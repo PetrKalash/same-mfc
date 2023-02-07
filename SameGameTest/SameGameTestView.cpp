@@ -66,11 +66,9 @@ void CSameGameTestView::OnDraw(CDC* pDC)
 	br.CreateStockObject(HOLLOW_BRUSH);
 	CBrush* pbrOld = pDC->SelectObject(&br);
 
-	int32_t indent_cells {0};
-
 	// Заполнение игрового поля ячейками
-	for (int32_t count_rows{}, row{}; row < pDoc->get_rows(); ++row, count_rows += indent_cells) {
-		for (int32_t count_cols{}, col{}; col < pDoc->get_cols(); ++col, count_cols += indent_cells) {
+	for (int32_t row{}; row < pDoc->get_rows(); ++row) {
+		for (int32_t col{}; col < pDoc->get_cols(); ++col) {
 			
 			// Устанавливаем для ячейки случайный цвет на игровом поле (который уже сгенерирован)
 			color = pDoc->get_colors(row, col);
@@ -79,16 +77,16 @@ void CSameGameTestView::OnDraw(CDC* pDC)
 			CRect rcBlock;
 
 			// Позиция одной ячейки
-			rcBlock.top = row * pDoc->get_height() + count_rows;
-			rcBlock.left = col * pDoc->get_width() + count_cols;
+			rcBlock.top = row * pDoc->get_height();
+			rcBlock.left = col * pDoc->get_width();
 
 			// Размер одной ячейки
 			rcBlock.right = rcBlock.left + pDoc->get_width();
 			rcBlock.bottom = rcBlock.top + pDoc->get_height();
 
 			// Заполняем блок соответствующим цветом
-			pDC->FillSolidRect(rcBlock, color);
-			pDC->Rectangle(rcBlock);
+			pDC->FillSolidRect(&rcBlock, color);
+			pDC->Rectangle(&rcBlock);
 		}
 	}
 }
@@ -122,8 +120,6 @@ void CSameGameTestView::OnInitialUpdate()
 
 void CSameGameTestView::ResizeWindow()
 {
-	int32_t indent_cells {0};
-
 	// Создание указателя на документ, чтобы получить данные игрового поля
 	CSameGameTestDoc* pDoc = GetDocument();
 	ASSERT_VALID(pDoc); if (!pDoc) return;
@@ -142,13 +138,9 @@ void CSameGameTestView::ResizeWindow()
 	int32_t width_menu_bar = rect_window.Width() - rect_client.Width();
 	int32_t height_menu_bar = rect_window.Height() - rect_client.Height();
 
-	// Вычисляем размер границы между блоками
-	int32_t width_indent = indent_cells * pDoc->get_cols() - indent_cells;
-	int32_t height_indent = indent_cells * pDoc->get_cols() - indent_cells;
-
 	// Изменяем размеры окна, исходя из размеров нашей доски
-	rect_window.right = rect_window.left + width_ciles + width_menu_bar + width_indent;
-	rect_window.bottom = rect_window.top + height_ciles + height_menu_bar + height_indent;
+	rect_window.right = rect_window.left + width_ciles + width_menu_bar;
+	rect_window.bottom = rect_window.top + height_ciles + height_menu_bar;
 
 	// Функция MoveWindow() изменяет размер окна фрейма
 	GetParentFrame()->MoveWindow(rect_window);
@@ -164,17 +156,29 @@ void CSameGameTestView::OnLButtonDown(UINT nFlags, CPoint point)
 	int32_t row = point.y / pDoc->get_height();
 	int32_t col = point.x / pDoc->get_width();
 
+	// Смотрим кол-во ячеек на игровом поле
+	int32_t count_cells = pDoc->get_count_cells();
+
 	// Очистка ячеек на игровом поле
 	pDoc->delete_cells(row, col);
+
+	// Смотрим кол-во ячеек после вызова удаления ячеек
+	int32_t delete_count_cells = pDoc->get_count_cells();
+
+	// Если кол-во яччек до равно кол-ву после удаления, значит на игровом поле изменений не произошло
+	if (count_cells == delete_count_cells) return;
 
 	// Перерисовка View после изменения игрового поля
 	Invalidate();
 	UpdateWindow();
-
-	// Сообщение об окончании игры
-	CString finish_game;
-	finish_game.Format(_T("No more moves left on the board"));
-	MessageBox(finish_game, _T("Finish Game!"), MB_OK | MB_ICONMASK);
+	
+	// Как только комбинаций для удаления не осталось, выводим сообщение об окончании игры
+	if (pDoc->is_game_over())
+	{
+		CString finish_game;
+		finish_game.Format(_T("No more moves left on the board! Block remaining: %d"), delete_count_cells);
+		MessageBox(finish_game, _T("Finish Game!"), MB_OK | MB_ICONMASK);
+	}
 	
 	// OnLButtonDown по умолчанию
 	CView::OnLButtonDown(nFlags, point);
