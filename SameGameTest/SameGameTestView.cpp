@@ -86,7 +86,8 @@ void CSameGameTestView::OnDraw(CDC* pDC)
 
 			// Заполняем блок соответствующим цветом
 			pDC->FillSolidRect(&rcBlock, color);
-			pDC->Rectangle(&rcBlock);
+			// Устанавливаем рамки для всех, кроме белых блоков (задний фон)
+			if(color != RGB(255, 255, 255)) pDC->Rectangle(&rcBlock);
 		}
 	}
 }
@@ -176,7 +177,7 @@ void CSameGameTestView::OnLButtonDown(UINT nFlags, CPoint point)
 	if (pDoc->is_game_over())
 	{
 		CString finish_game;
-		finish_game.Format(_T("No more moves left on the board! Block remaining: %d"), delete_count_cells);
+		finish_game.Format(_T("Game Over! Blocks remaining: %d"), delete_count_cells);
 		MessageBox(finish_game, _T("Finish Game!"), MB_OK | MB_ICONMASK);
 	}
 	
@@ -190,7 +191,7 @@ void CSameGameTestView::set_color_count(int32_t count_colors)
 	CSameGameTestDoc* pDoc = GetDocument();
 	ASSERT_VALID(pDoc); if (!pDoc) return;
 
-	pDoc->set_num_colors(count_colors);
+	pDoc->set_count_colors(count_colors);
 
 	// Перерисовывание игрового поля View
 	Invalidate();

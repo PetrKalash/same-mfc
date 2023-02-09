@@ -27,7 +27,7 @@ public:
 	int32_t get_height() const							{ return m_board.get_height();		    }
 	int32_t get_count_cells() const						{ return m_board.get_count_cells();		}
 
-	void set_num_colors(int32_t count_colors);
+	void set_count_colors(int32_t count_colors);
 	void set_cells_count(int32_t count_cols)			{ m_board.set_cells_count(count_cols);  }
 	void set_cells_size(int32_t cells_size)				{ m_board.set_cells_size(cells_size);   }
 

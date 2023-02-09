@@ -31,6 +31,10 @@ public:
 	void create_cells();
 	// ѕроверка на конец игры
 	bool is_game_over();
+	// —двиг €чеек вниз
+	void cells_move_down();
+	// —двиг €чеек влево
+	void cells_move_left();
 	//  омпактный сдвиг игровой доски после удалени€ €чеек
 	void compact_board();
 	// ќчистка одинаковых €чеек
@@ -60,7 +64,7 @@ public:
 	/* —еттеры */
 
 	// ”становка нового кол-ва цветов дл€ €чеек на игровом поле
-	void set_num_colors(int32_t &count_colors);
+	void set_count_colors(int32_t &count_colors);
 	// ”становка нового кол-ва €чеек на игровом поле
 	void set_cells_count(int32_t &count_cols);
 	// ”становка нового размера €чеек на игровом поле

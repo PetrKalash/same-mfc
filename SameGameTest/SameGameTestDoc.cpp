@@ -28,10 +28,10 @@ CSameGameTestDoc::~CSameGameTestDoc()
 {
 }
 
-void CSameGameTestDoc::set_num_colors(int32_t count_colors)
+void CSameGameTestDoc::set_count_colors(int32_t count_colors)
 {
 	// Вызываем метод для изменения кол-ва цветов на поле
-	m_board.set_num_colors(count_colors);
+	m_board.set_count_colors(count_colors);
 	// Присваиваем ячейкам новые значения на игровом поле
 	m_board.setup_board();
 }
