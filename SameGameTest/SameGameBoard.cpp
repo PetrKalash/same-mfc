@@ -18,6 +18,19 @@ m_count_colors{3}, m_count_cells{}
 	m_colors.at(7) = RGB(122, 236, 73);		// Green Color
 }
 
+CSameGameBoard::CSameGameBoard(const CSameGameBoard &board)
+{
+	m_width = board.m_width;
+	m_height = board.m_height;
+	m_rows = board.m_rows;
+	m_cols = board.m_cols;
+	m_count_colors = board.m_count_colors;
+	m_count_cells = board.m_count_cells;
+
+	for (size_t i{}; i < 8; ++i)
+		m_colors.at(i) = board.m_colors.at(i);
+}
+
 CSameGameBoard::~CSameGameBoard()
 {
 	delete_board();

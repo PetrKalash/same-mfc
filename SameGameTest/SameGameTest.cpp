@@ -113,7 +113,6 @@ BOOL CSameGameTestApp::InitInstance()
 
 // Обработчики сообщений CSameGameTestApp
 
-
 // Диалоговое окно CAboutDlg используется для описания сведений о приложении
 
 class CAboutDlg : public CDialogEx
@@ -132,6 +131,8 @@ protected:
 // Реализация
 protected:
 	DECLARE_MESSAGE_MAP()
+public:
+	afx_msg void OnBnClickedOk();
 };
 
 CAboutDlg::CAboutDlg() noexcept : CDialogEx(IDD_ABOUTBOX)
@@ -144,6 +145,7 @@ void CAboutDlg::DoDataExchange(CDataExchange* pDX)
 }
 
 BEGIN_MESSAGE_MAP(CAboutDlg, CDialogEx)
+	ON_BN_CLICKED(IDOK, &CAboutDlg::OnBnClickedOk)
 END_MESSAGE_MAP()
 
 // Команда приложения для запуска диалога
@@ -151,9 +153,16 @@ void CSameGameTestApp::OnAppAbout()
 {
 	CAboutDlg aboutDlg;
 	aboutDlg.DoModal();
+
+	CImage image;
+	image.Load(_T("C:\\image.png")); // just change extension to load jpg
+	CBitmap bitmap;
+	bitmap.Attach(image.Detach());
 }
 
 // Обработчики сообщений CSameGameTestApp
-
-
-
+void CAboutDlg::OnBnClickedOk()
+{
+	// TODO: добавьте свой код обработчика уведомлений
+	CDialogEx::OnOK();
+}

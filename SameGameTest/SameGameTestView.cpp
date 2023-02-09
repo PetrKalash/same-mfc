@@ -30,6 +30,11 @@ BEGIN_MESSAGE_MAP(CSameGameTestView, CView)
 	ON_UPDATE_COMMAND_UI(ID_LEVEL_NORMAL, &CSameGameTestView::OnUpdateLevelNormal)
 	ON_COMMAND(ID_SIZE_BLOCK, &CSameGameTestView::OnSizeBlock)
 	ON_COMMAND(ID_COUNT_BLOCK, &CSameGameTestView::OnCountBlock)
+	ON_COMMAND(ID_EDIT_UNDO, &CSameGameTestView::OnEditUndo)
+	ON_UPDATE_COMMAND_UI(ID_EDIT_UNDO, &CSameGameTestView::OnUpdateEditUndo)
+	ON_COMMAND(ID_EDIT_REDO, &CSameGameTestView::OnEditRedo)
+	ON_UPDATE_COMMAND_UI(ID_EDIT_REDO, &CSameGameTestView::OnUpdateEditRedo)
+	ON_COMMAND(ID_ABOUT_GAME, &CSameGameTestView::OnAboutGame)
 END_MESSAGE_MAP()
 
 // Создание или уничтожение CSameGameTestView
@@ -335,4 +340,38 @@ void CSameGameTestView::OnSizeBlock()
 		// Изменяем размеры View
 		ResizeWindow();
 	}
+}
+
+void CSameGameTestView::OnEditUndo()
+{
+	// Получаем указатель на Document
+	CSameGameTestDoc* pDoc = GetDocument();
+	ASSERT_VALID(pDoc);
+	if(!pDoc)
+		return;
+	pDoc->UndoLast();
+
+	// Перерисовываем View
+	Invalidate();
+	UpdateWindow();
+}
+
+void CSameGameTestView::OnUpdateEditUndo(CCmdUI *pCmdUI)
+{
+	
+}
+
+void CSameGameTestView::OnEditRedo()
+{
+	
+}
+
+void CSameGameTestView::OnUpdateEditRedo(CCmdUI *pCmdUI)
+{
+	
+}
+
+void CSameGameTestView::OnAboutGame()
+{
+
 }

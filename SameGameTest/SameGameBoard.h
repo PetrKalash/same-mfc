@@ -20,7 +20,11 @@ private:
 public:
 	/* Конструкторы и деструктор */
 
+	// Конструктор по умолчанию
 	CSameGameBoard();
+	// Конструктор глубокого копирования
+	CSameGameBoard(const CSameGameBoard &board);
+	// Деструктор
 	~CSameGameBoard();
 
 	/* Методы */
