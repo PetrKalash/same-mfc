@@ -191,6 +191,7 @@
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="AboutDialog.h" />
     <ClInclude Include="OptionDialog.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="MainFrm.h" />
@@ -203,6 +204,7 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AboutDialog.cpp" />
     <ClCompile Include="MainFrm.cpp" />
     <ClCompile Include="OptionDialog.cpp" />
     <ClCompile Include="pch.cpp">
@@ -224,6 +226,7 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\icon1.ico" />
+    <Image Include="res\PetrKalash.ico" />
     <Image Include="res\SameGameTest.ico" />
     <Image Include="res\SameGameTestDoc.ico" />
   </ItemGroup>

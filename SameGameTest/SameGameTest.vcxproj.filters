@@ -45,6 +45,9 @@
     <ClInclude Include="OptionDialog.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
+    <ClInclude Include="AboutDialog.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SameGameTest.cpp">
@@ -68,6 +71,9 @@
     <ClCompile Include="OptionDialog.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="AboutDialog.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SameGameTest.rc">
@@ -87,6 +93,9 @@
       <Filter>Файлы ресурсов</Filter>
     </Image>
     <Image Include="res\icon1.ico">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="res\PetrKalash.ico">
       <Filter>Файлы ресурсов</Filter>
     </Image>
   </ItemGroup>

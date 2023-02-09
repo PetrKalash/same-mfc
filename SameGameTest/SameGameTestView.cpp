@@ -14,6 +14,8 @@
 #define new DEBUG_NEW
 #endif
 
+#include "AboutDialog.h"
+
 // CSameGameTestView
 IMPLEMENT_DYNCREATE(CSameGameTestView, CView)
 BEGIN_MESSAGE_MAP(CSameGameTestView, CView)
@@ -274,7 +276,6 @@ void CSameGameTestView::OnUpdateLevelImpossible(CCmdUI *pCmdUI)
 // Изменение количества блоков на игровом поле
 void CSameGameTestView::OnCountBlock()
 {
-	// Получение указателя на документ для доступа к данным
 	CSameGameTestDoc *pDoc = GetDocument();
 	ASSERT_VALID(pDoc); if (!pDoc) return;
 
@@ -344,12 +345,9 @@ void CSameGameTestView::OnSizeBlock()
 
 void CSameGameTestView::OnEditUndo()
 {
-	// Получаем указатель на Document
 	CSameGameTestDoc* pDoc = GetDocument();
-	ASSERT_VALID(pDoc);
-	if(!pDoc)
-		return;
-	pDoc->UndoLast();
+	ASSERT_VALID(pDoc); if(!pDoc) return;
+	pDoc->undo_last();
 
 	// Перерисовываем View
 	Invalidate();
@@ -358,20 +356,35 @@ void CSameGameTestView::OnEditUndo()
 
 void CSameGameTestView::OnUpdateEditUndo(CCmdUI *pCmdUI)
 {
-	
+	CSameGameTestDoc* pDoc = GetDocument();
+	ASSERT_VALID(pDoc); if(!pDoc) return;
+	pCmdUI->Enable(pDoc->can_undo());
 }
 
 void CSameGameTestView::OnEditRedo()
 {
-	
+	CSameGameTestDoc* pDoc = GetDocument();
+	ASSERT_VALID(pDoc); if(!pDoc) return;
+	pDoc->redo_last();
+
+	// Перерисовываем View
+	Invalidate();
+	UpdateWindow();
 }
 
 void CSameGameTestView::OnUpdateEditRedo(CCmdUI *pCmdUI)
 {
-	
+	CSameGameTestDoc* pDoc = GetDocument();
+	ASSERT_VALID(pDoc); if(!pDoc) return;
+	pCmdUI->Enable(pDoc->can_redo());
 }
 
 void CSameGameTestView::OnAboutGame()
 {
+	CSameGameTestDoc *pDoc = GetDocument();
+	ASSERT_VALID(pDoc); if (!pDoc) return;
+	CAboutDialog about_dialog(this);
 
+	// Начало работы с окном через форму
+	if (about_dialog.DoModal() == IDOK){}
 }

@@ -29,6 +29,15 @@ CSameGameBoard::CSameGameBoard(const CSameGameBoard &board)
 
 	for (size_t i{}; i < 8; ++i)
 		m_colors.at(i) = board.m_colors.at(i);
+
+	// Создание нового игрового поля
+	delete_board();
+	create_cells();
+
+	// Копирование содержимого игрового поля
+	for(size_t rows{}; rows < m_rows; ++rows)
+		for(size_t cols{}; cols < m_cols; ++cols)
+			m_cells.at(rows).at(cols) = board.m_cells.at(rows).at(cols);
 }
 
 CSameGameBoard::~CSameGameBoard()

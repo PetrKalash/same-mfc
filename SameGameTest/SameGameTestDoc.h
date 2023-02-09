@@ -35,7 +35,7 @@ public:
 	void redo_last();
 	void undo_last();
 	bool can_redo();
-	bool can_udo();
+	bool can_undo();
 
 // Переопределение
 public:

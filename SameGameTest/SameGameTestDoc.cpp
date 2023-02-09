@@ -87,7 +87,7 @@ bool CSameGameTestDoc::can_redo()
 	return !m_redo.empty();
 }
 
-bool CSameGameTestDoc::can_udo()
+bool CSameGameTestDoc::can_undo()
 {
 	// Убеждаемся, что у нас есть возможность выполнить отмену действия
 	return !m_undo.empty();
@@ -125,6 +125,8 @@ BOOL CSameGameTestDoc::OnNewDocument()
 {
 	if (!CDocument::OnNewDocument()) return FALSE;
 	
+	this->SetTitle(L"Аркадная игра");
+
 	// Повторная инициализация игровой доски
 	m_board->setup_board();
 	
